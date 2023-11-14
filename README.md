@@ -42,7 +42,7 @@ allprojects {
 dependencies {
   // 添加本框架 BigImageViewPager https://github.com/SherlockGougou/BigImageViewPager
   // 此处展示的是最新版本
-  implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-7.2.5'
+  implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-7.2.7'
   
   // 另外还需要依赖 glide
   implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -146,6 +146,7 @@ public class MyAppGlideModule extends AppGlideModule {
 |setImageList|设置图片地址集合|三选一|
 |setIndex|设置开始的索引|从0开始|
 |setLoadStrategy|设置加载策略|详见加载策略说明|
+|setLongPicDisplayMode|设置长图的展示模式|默认缩小展示，可选宽度撑满|
 |setOnOriginProgressListener|设置原图加载进度回调|加载原图的百分比进度|
 |setProgressLayoutId|自定义百分比布局|详细见demo|
 |setShowCloseButton|设置是否显示关闭按钮|默认false，不显示|

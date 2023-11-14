@@ -101,8 +101,15 @@ class ImagePreview {
     var loadStrategy = LoadStrategy.Auto
         private set
 
+    // 长图的展示模式
+    var longPicDisplayMode = LongPicDisplayMode.Default
+        private set
+
     @LayoutRes
     var previewLayoutResId = R.layout.sh_layout_preview
+        private set
+
+    var onCustomLayoutCallback: OnCustomLayoutCallback? = null
         private set
 
     @DrawableRes
@@ -295,6 +302,11 @@ class ImagePreview {
         return this
     }
 
+    fun setLongPicDisplayMode(longPicDisplayMode: LongPicDisplayMode): ImagePreview {
+        this.longPicDisplayMode = longPicDisplayMode
+        return this
+    }
+
     fun setEnableDragClose(enableDragClose: Boolean): ImagePreview {
         isEnableDragClose = enableDragClose
         return this
@@ -390,8 +402,9 @@ class ImagePreview {
      * 完全自定义预览界面，请参考：R.layout.sh_layout_preview
      * 并保持控件类型、id和其中一致，否则会找不到控件而报错
      */
-    fun setPreviewLayoutResId(previewLayoutResId: Int): ImagePreview {
+    fun setPreviewLayoutResId(previewLayoutResId: Int, onCustomLayoutCallback: OnCustomLayoutCallback?): ImagePreview {
         this.previewLayoutResId = previewLayoutResId
+        this.onCustomLayoutCallback = onCustomLayoutCallback
         return this
     }
 
@@ -414,6 +427,7 @@ class ImagePreview {
         downIconResId = R.drawable.icon_download_new
         errorPlaceHolder = R.drawable.load_failed
         loadStrategy = LoadStrategy.Default
+        longPicDisplayMode = LongPicDisplayMode.Default
         folderName = "Download"
         contextWeakReference.clear()
         bigImageClickListener = null
@@ -493,6 +507,19 @@ class ImagePreview {
          * 全自动模式：WiFi原图，流量下默认普清，可点击按钮查看原图
          */
         Auto
+    }
+
+    enum class LongPicDisplayMode {
+        /**
+         * 缩小填充，双击拉满，可手动缩放
+         */
+        Default,
+
+        /**
+         * 左右拉满，双击缩小，可手动缩放
+         * 一般竖屏手机使用
+         */
+        FillWidth,
     }
 
     private object InnerClass {
